@@ -9,6 +9,8 @@ class NodeGraph {
         this.isFinal = isFinal;
         this.isMax = isMax;
         this.visited = false;
+        this.uniqueID = nodeCounter;
+        nodeCounter = nodeCounter + 1;
     }
 }
 
@@ -23,6 +25,7 @@ function clickPlayButton(actualCheckersGame, action){
         buildCheckersBoard(actualCheckersGame);
 
     }else if (action == "move"){
+        nodeCounter = 0;
         //make move computed using minMax with alpha beta pruning
         var isMax = true;
         var type = "max";
@@ -31,7 +34,7 @@ function clickPlayButton(actualCheckersGame, action){
         if (actualCheckersGame.fen()[0] == 'B'){
             isMax = false;
             type = "min";
-            depth = 3;
+            depth = 2;
         }
         
         var treeNode = computeTree(actualCheckersGame, 0, depth, isMax);
@@ -39,6 +42,7 @@ function clickPlayButton(actualCheckersGame, action){
         var bestIndex = indexOfMaxMin(treeNode.valueF, type);
         actualCheckersGame.move(actualCheckersGame.moves()[bestIndex]);
         buildCheckersBoard(actualCheckersGame);
+        buildMinMaxGraph(treeNode);
 
     }else if (action == "rngBRR"){
         //makes 10 random moves
