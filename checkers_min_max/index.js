@@ -12,10 +12,13 @@ var topMarginPer = Math.floor(100 * topMargin / fullWindowHeight);
 var fieldSize = windowSize/10;
 var nodeCounter = 0;
 
+const color1 = "#cccccc";
+const color2 = "#5286bf";
 const idFirstDiv = "wholeScreen";
 const idLeftDiv = "checkersBoard";
 const idRightDiv = "minMaxTree";
 const idLeftDivPaTurn = "paragrapheCoup";
+const idRightDivStat = "paragrapheStat";
 const idCheckersSVG = "cherckersSVG";
 const leftSideBackgroundColor = "#99ccff";
 
@@ -70,3 +73,4 @@ console.log(test)
 z = d3.select("#graphSVG").graphviz().height(windowSize).width(windowSize).fit(true).renderDot(test);
 console.log(z)
 */
+

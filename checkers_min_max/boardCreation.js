@@ -1,5 +1,5 @@
 //builds a screen with two divisions, each with an ID
-function buildScreen(){    
+function buildScreen(){       
 
     /*
     const idFirstDiv = "wholeScreen";
@@ -49,7 +49,8 @@ function buildScreen(){
     //who plays tracker
     d3.select("#" + idLeftDiv)
         .append("p")
-        .attr("id", idLeftDivPaTurn);
+        .attr("id", idLeftDivPaTurn)
+        .style("float", "left");
 
     //creates svg window for checkers
     d3.select("#" + idLeftDiv)
@@ -61,6 +62,11 @@ function buildScreen(){
         .style("width", windowSize + "px")
         .style("height", windowSize + "px")
         .style("background", "white");
+    
+    //adds stats to min max tree
+    d3.select("#" + idRightDiv)
+        .append("p")
+        .attr("id", idRightDivStat);
 
     //creates svg window for minMaxTree
     d3.select("#minMaxTree")
@@ -77,6 +83,7 @@ function buildScreen(){
 //populates the chess divisian with a checkers board
 function buildCheckersBoard(actualCheckersGame){
     var board = fromCheckersToVis(actualCheckersGame.fen());
+       
 
     d3.select("#" + idLeftDivPaTurn)
         .selectAll("*")
@@ -178,32 +185,29 @@ function buildCheckersBoard(actualCheckersGame){
         .attr("height", fieldSize + "px")
         .style("fill", function (d) {
             if (d.piece == "-") 
-                return "#cccccc";
+                return color1;
             else
-                return "#5286bf";
+                return color2;
         });
 
-    /*
-    var lettre = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-    var chiffre = ['10', '9','8', '7', '6', '5', '4', '3', '2','1'];
+    
+    boardSVG.append("circle")
+        .attr('cx', function (d) {
+            return d.x*fieldSize + fieldSize/2;
+        })
+        .attr('cy', function (d) {
+            return d.y*fieldSize + fieldSize/2;
+        })
+        .attr('r', fieldSize/2 * 0.6)
+        .style('fill', function (d) {
+            return fromPieceToUnicode(d.piece);
+        })
+        .attr("pointer-events", "none");
 
-    //appends rectangle numbers/letters
-    boardSVG.append("text")
-    .style("font-size", "15px")
-    .attr("x", function (d) {
-        return d.x*fieldSize + fieldSize - 22;
-    })
-    .attr("y", function (d) {
-        return d.y*fieldSize + 12; 
-    })
-    .text(function(d) { 
-        return lettre[d.x]+chiffre[d.y]; 
-    });
-    */
+    /*
+    boardSVG.append("circle").attr()
 
     //adds symbol
-    
-
     
     boardSVG.append("text")
         .attr("x", function (d) {
@@ -221,5 +225,25 @@ function buildCheckersBoard(actualCheckersGame){
         })
         .attr("class", "bar-text")
         .attr("pointer-events", "none");
+
+
+    var lettre = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+    var chiffre = ['10', '9','8', '7', '6', '5', '4', '3', '2','1'];
+
+    //appends rectangle numbers/letters
+    boardSVG.append("text")
+    .style("font-size", "15px")
+    .attr("x", function (d) {
+        return d.x*fieldSize + fieldSize - 22;
+    })
+    .attr("y", function (d) {
+        return d.y*fieldSize + 12; 
+    })
+    .text(function(d) { 
+        return lettre[d.x]+chiffre[d.y]; 
+    });
+
+    */
+
 
 }

@@ -29,12 +29,12 @@ function clickPlayButton(actualCheckersGame, action){
         //make move computed using minMax with alpha beta pruning
         var isMax = true;
         var type = "max";
-        var depth = 5;
+        var depth = 4;
 
         if (actualCheckersGame.fen()[0] == 'B'){
             isMax = false;
             type = "min";
-            depth = 2;
+            depth = 5;
         }
         
         var treeNode = computeTree(actualCheckersGame, 0, depth, isMax);
@@ -42,7 +42,7 @@ function clickPlayButton(actualCheckersGame, action){
         var bestIndex = indexOfMaxMin(treeNode.valueF, type);
         actualCheckersGame.move(actualCheckersGame.moves()[bestIndex]);
         buildCheckersBoard(actualCheckersGame);
-        buildMinMaxGraph(treeNode);
+        buildMinMaxGraph(treeNode, depth);
 
     }else if (action == "rngBRR"){
         //makes 10 random moves
@@ -125,7 +125,7 @@ function minmax(node, alpha, beta){
 function computeTree(checkersGame, actualDepth, finalDepth, isMax){
     //these two lines define if we are in final or not
     var isFinal = false;
-    if(actualDepth+1 == finalDepth){isFinal = true;}
+    if(actualDepth == finalDepth){isFinal = true;}
 
     // if not final depth
     if(!isFinal){

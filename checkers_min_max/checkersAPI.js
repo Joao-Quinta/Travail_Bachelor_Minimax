@@ -67,15 +67,17 @@ function fromPieceToUnicode(piece){
     // if piece is null return nothing
     // else
     if(piece == "-"){
-        return "";
+        return color1;
+    }else if(piece == 0){
+        return color2;
     }else if(piece == "b"){
-        return "\u26C2";
+        return "black";
     }else if(piece == "w"){
-        return "\u26C0";
+        return "white";
     }else if(piece == "W"){
-        return "\u26C1";
+        return "red";
     }else if(piece == "B"){
-        return "\u26C3";
+        return "brown";
     }else if(piece == "0"){
         return "";
     }else{

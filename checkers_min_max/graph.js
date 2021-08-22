@@ -1,6 +1,36 @@
-function buildMinMaxGraph(treeNode){
+function buildMinMaxGraph(treeNode, depth){
+    var totalNumberOfNodes = treeNode.uniqueID;
+    var nodesVisited = 0;
+
+    var ranksep;
+
+    switch(depth){
+        case 1: 
+            ranksep = '2';
+            break;
+        case 2: 
+            ranksep = '5';
+            break;
+        case 3: 
+            ranksep = '15';
+            break;
+        case 4: 
+            ranksep = '10';
+            break;
+        default: 
+            ranksep = '15';
+            break;
+    }
+
+    /*
+        1 -> 2
+        2 -> 5
+        3 -> 15
+        4 -> 10
+    */
+    var root = treeNode.uniqueID.toString();
     var finalList = []
-    var start = 'digraph  { layout=twopi; ratio=auto; overlap=true; ranksep=20;';
+    var start = 'digraph  { layout=twopi; ratio=auto; overlap=true; ranksep=' + ranksep + '; root=' + root + ';';
     var end = '}';
     var nodesListEmpty = [];
     var startFilledNodes = '    node [style="filled"]';
@@ -9,11 +39,10 @@ function buildMinMaxGraph(treeNode){
     var maxColors = 'color="#006400", fillcolor="#228B22"'
     var minColors = 'color="#800000", fillcolor="#d62728"'
     var stack = [];
-    console.log(treeNode)
 
     stack.push(treeNode);
     while (stack.length > 0){
-        var currentNode = stack.pop();
+        var currentNode = stack.pop(0);
         var colors = minColors;
         var val;
         var nodeDef;
@@ -23,6 +52,7 @@ function buildMinMaxGraph(treeNode){
         }
 
         if(currentNode.visited){
+            nodesVisited = nodesVisited + 1;
             if (currentNode.isFinal){
                 val = currentNode.value.toString();
             }else{
@@ -56,23 +86,46 @@ function buildMinMaxGraph(treeNode){
         }
 
         if(!currentNode.isFinal){
+            var transitionChosen;
             var transition;
             var fils;
+            var label;
+            var color;
             for (var i = 0; i < currentNode.value.length; i++){
+                label = (i+1).toString();
                 fils = currentNode.value[i];
-                transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString();
-                transitionsList.push(transition)
-                stack.push(fils);
+                if (fils.visited){
+                    if(currentNode.isMax){
+                        transitionChosen = indexOfMaxMin(currentNode.valueF,"max");
+                        color = 'green';
+                    }else{
+                        transitionChosen = indexOfMaxMin(currentNode.valueF,"min");
+                        color = 'red';
+                    }
+                    if (i == transitionChosen){
+                        transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString()+ ' [label=' + label + ' color='+ color +' penwidth=4]';
+                    }else{
+                        transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString()+ ' [label=' + label + ']';
+                    }
+
+                    transitionsList.push(transition);
+                    stack.push(fils);
+                    
+                }
+                if(!fils.visited && depth < 4){
+                    transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString() + ' [style=dashed label=' + label + ']';
+
+                    transitionsList.push(transition);
+                    stack.push(fils);
+                }
+                
             }
         }
-        console.log(nodeDef)
     }
 
     var transitionsString = transitionsList.join('');
     var nodesFilledString = nodesListFilled.join('');
     var nodesEmptydString = nodesListEmpty.join('');
-    console.log(nodesFilledString)
-    console.log(transitionsString)
 
     finalList.push(start);
     finalList.push(nodesEmptydString);
@@ -82,9 +135,7 @@ function buildMinMaxGraph(treeNode){
     finalList.push(end);
 
     var finalString = finalList.join('');
-    d3.select("#graphSVG")
-        .selectAll("*")
-        .remove();
+    
 
     var u = d3.select("#graphSVG")
         .graphviz()
@@ -94,24 +145,6 @@ function buildMinMaxGraph(treeNode){
         .dot(finalString)
         .render();
 
-    console.log(u)
+    console.log("nodes visited -> " + nodesVisited);
+    console.log("nodes total   -> " + totalNumberOfNodes);
 }
-
-/*
-test = [
-    'digraph  {',
-    '    a [fillcolor="#d62728", label="main"]',
-    '    a -> b -> c -> d -> e -> f -> g -> h -> i -> j -> j1 -> j2 -> j3 -> l -> 2',
-    '    a -> o -> p',
-    '    a -> d -> f',
-    '    node [style="filled"]',
-    '    a -> 1 -> 2',
-    '    a -> a2',
-    '    1 -> i',
-    '}'
-]
-test = test.join('')
-console.log(test)
-z = d3.select("#graphSVG").graphviz().height(windowSize).width(windowSize).fit(true).renderDot(test);
-console.log(z)
-*/
