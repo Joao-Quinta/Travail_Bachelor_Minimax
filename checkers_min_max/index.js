@@ -38,39 +38,14 @@ function launchGame(){
 }
 
 launchGame();
-/*
-test = [
-    'digraph  {',
-    '    a [fillcolor="#FFFFFF", label="main"]',
-    '    a -> b -> c -> d -> e -> f -> g -> h -> i -> j -> j1 -> j2 -> j3 -> l -> 2',
-    '    a -> o -> p',
-    '    a -> d -> f',
-    '    node [style="filled"]',
-    '    1 [fillcolor="#FFFFFF", label="true"]',
-    '    a -> 1 -> 2',
-    '    a -> a2',
-    '    1 -> i',
-    '}'
-]
-test = test.join('')
-console.log(test)
-z = d3.select("#graphSVG").graphviz().height(windowSize).width(windowSize).fit(true).renderDot(test);
-console.log(z)
 
-
-
-test = [
-    'digraph  {',
-    '    a [color="#800000", fillcolor="#d62728", label="main"]',
-    '    b [color="#006400", fillcolor="#228B22", label="main2"]',
-    '    node [style="filled"]',
-    '    1 [color="#800000", fillcolor="#d62728", label="true"]',
-    '    2 [color="#006400", fillcolor="#228B22", label="false"]',
-    '}'
-]
-test = test.join('')
-console.log(test)
-z = d3.select("#graphSVG").graphviz().height(windowSize).width(windowSize).fit(true).renderDot(test);
-console.log(z)
-*/
-
+var test2 = "amaxb,c.bmind,e.cminf,g.dmax2.emax-1.fmax4.gmax-2";
+var test1 = test2.split('.');
+console.log(test1)
+var nodes = [];
+while (test1.length > 0){
+    var current = test1.pop();
+    console.log(current)
+    console.log(current[0] + '   ::   ' + current.slice(1, 3) + '   ::   ' + current.slice(4,));
+    
+}
