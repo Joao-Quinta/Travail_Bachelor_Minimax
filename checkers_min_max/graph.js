@@ -1,4 +1,4 @@
-function buildMinMaxGraph(treeNode, depth){
+function buildMinMaxGraph(treeNode, depth, isCostum){
     var totalNumberOfNodes = treeNode.uniqueID;
     var nodesVisited = 0;
 
@@ -31,6 +31,11 @@ function buildMinMaxGraph(treeNode, depth){
     var root = treeNode.uniqueID.toString();
     var finalList = []
     var start = 'digraph  { layout=twopi; ratio=auto; overlap=true; ranksep=' + ranksep + '; root=' + root + ';';
+    if (isCostum){
+        start = 'digraph  {ratio=auto; overlap=false;';
+
+    }
+    
     var end = '}';
     var nodesListEmpty = [];
     var startFilledNodes = '    node [style="filled"]';
@@ -103,7 +108,8 @@ function buildMinMaxGraph(treeNode, depth){
                         color = 'red';
                     }
                     if (i == transitionChosen){
-                        transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString()+ ' [label=' + label + ' color='+ color +' penwidth=4]';
+                        //transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString()+ ' [label=' + label + ' color='+ color +' penwidth=4]';
+                        transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString()+ ' [label=' + label + ']';
                     }else{
                         transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString()+ ' [label=' + label + ']';
                     }

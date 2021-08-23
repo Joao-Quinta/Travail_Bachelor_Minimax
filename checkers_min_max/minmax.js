@@ -2,6 +2,7 @@
     //value is the list of sons it can have - or its numeric value if final
     //isFinal determins if its a final node or not -> could be achieved by checking the data type of value -> if int : final, if list : not final
     //isMax -> determins if this node is trying to minimise or maximise the socre
+
 class NodeGraph {
     constructor(value, isFinal, isMax){
         this.value = value;
@@ -11,6 +12,18 @@ class NodeGraph {
         this.visited = false;
         this.uniqueID = nodeCounter;
         nodeCounter = nodeCounter + 1;
+    }
+}
+
+class NodeCostum {
+    constructor(name, value, isFinal, isMax){
+        this.value = value;
+        this.valueF = [];
+        this.isFinal = isFinal;
+        this.isMax = isMax;
+        this.visited = false;
+        this.uniqueID = name;
+        
     }
 }
 
@@ -29,7 +42,7 @@ function clickPlayButton(actualCheckersGame, action){
         //make move computed using minMax with alpha beta pruning
         var isMax = true;
         var type = "max";
-        var depth = 3;
+        var depth = 1;
 
         if (actualCheckersGame.fen()[0] == 'B'){
             isMax = false;
@@ -42,7 +55,7 @@ function clickPlayButton(actualCheckersGame, action){
         var bestIndex = indexOfMaxMin(treeNode.valueF, type);
         actualCheckersGame.move(actualCheckersGame.moves()[bestIndex]);
         buildCheckersBoard(actualCheckersGame);
-        buildMinMaxGraph(treeNode, depth);
+        buildMinMaxGraph(treeNode, depth, false);
 
     }else if (action == "rngBRR"){
         //makes 10 random moves
