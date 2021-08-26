@@ -42,7 +42,7 @@ function clickPlayButton(actualCheckersGame, action){
         //make move computed using minMax with alpha beta pruning
         var isMax = true;
         var type = "max";
-        var depth = 1;
+        var depth = 3;
 
         if (actualCheckersGame.fen()[0] == 'B'){
             isMax = false;

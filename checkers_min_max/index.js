@@ -34,6 +34,9 @@ test1();
 test2();
 
 function launchGame(){
+    d3.select('#wholeScreen')
+        .remove();
+        
     var draughtsGame = new Draughts();
     buildScreen();
     buildCheckersBoard(draughtsGame);

@@ -1,5 +1,6 @@
 //builds a screen with two divisions, each with an ID
 function buildScreen(){   
+
     //create a div of full scree  
     d3.select("body")
         .append("div")
@@ -33,6 +34,41 @@ function buildScreen(){
         .append("div")
         .attr("id", leftSideHeaderSVGBot)
         .attr("class", "leftSideHeaderBot");
+
+    d3.select("#" + leftSideHeaderSVGBot)
+        .append("div")
+        .attr("id", leftSideHeaderSVGBot + "B")
+        .attr("class", "leftSideHeaderBotB");
+
+    d3.select("#" + leftSideHeaderSVGBot + "B")
+        .append("div")
+        .attr("id", leftSideHeaderSVGBot + "BL")
+        .attr("class", "leftSideHeaderBotNL");
+
+    d3.select("#" + leftSideHeaderSVGBot + "B")
+        .append("div")
+        .attr("id", leftSideHeaderSVGBot + "BR")
+        .attr("class", "leftSideHeaderBotNR");
+
+    d3.select("#" + leftSideHeaderSVGBot)
+        .append("div")
+        .attr("id", leftSideHeaderSVGBot + "Score")
+        .attr("class", "leftSideHeaderBotScore");
+
+    d3.select("#" + leftSideHeaderSVGBot)
+        .append("div")
+        .attr("id", leftSideHeaderSVGBot + "N")
+        .attr("class", "leftSideHeaderBotN");
+
+    d3.select("#" + leftSideHeaderSVGBot + "N")
+        .append("div")
+        .attr("id", leftSideHeaderSVGBot + "NL")
+        .attr("class", "leftSideHeaderBotNL");
+
+    d3.select("#" + leftSideHeaderSVGBot + "N")
+        .append("div")
+        .attr("id", leftSideHeaderSVGBot + "NR")
+        .attr("class", "leftSideHeaderBotNR");
     
     d3.select("#" + idLeftDiv)
         .append("svg")
@@ -78,7 +114,7 @@ function buildCheckersBoard(actualCheckersGame){
         .selectAll("*")
         .remove();
     
-    d3.select("#" + leftSideHeaderSVGBot)
+    d3.select("#" + leftSideHeaderSVGBot + "Score")
         .selectAll("*")
         .remove();
 
@@ -94,7 +130,7 @@ function buildCheckersBoard(actualCheckersGame){
         }else{
             texte = "Partie terminé. Résultat : Noirs ont gagné";
         }
-        d3.select("#" + leftSideHeaderSVGBot)
+        d3.select("#" + leftSideHeaderSVGBot + "Score")
             .append("text")
             .text(texte);
         
@@ -105,14 +141,25 @@ function buildCheckersBoard(actualCheckersGame){
             .attr("value", "REJOUER")
             .style("margin-left", "42%")
             .on("click", function() {
-                lanchGame();
+                launchGame();
             });
 
     }else{
         //a faire plus tard, va faire jouer un coup
-        d3.select("#" + leftSideHeaderSVGBot)
+        d3.select("#" + leftSideHeaderSVGBot + "Score")
             .append("text")
             .text("Game state : " + computeValue(actualCheckersGame));
+
+
+        d3.select("#" + leftSideHeaderSVGTop)
+            .append("input")
+            .attr("type", "button")
+            .attr("class", "button")
+            .attr("value", "RELANCER")
+            .on("click", function() {
+                
+                launchGame();
+            });
 
         d3.select("#" + leftSideHeaderSVGTop)
             .append("input")
@@ -121,15 +168,6 @@ function buildCheckersBoard(actualCheckersGame){
             .attr("value", "FAIRE UN COUP")
             .on("click", function() {
                 clickPlayButton(actualCheckersGame, "move");
-            });
-        
-        d3.select("#" + leftSideHeaderSVGTop)
-            .append("input")
-            .attr("type", "button")
-            .attr("class", "button")
-            .attr("value", "RANDOM")
-            .on("click", function() {
-                clickPlayButton(actualCheckersGame, "rng");
             });
 
         d3.select("#" + leftSideHeaderSVGTop)
@@ -140,6 +178,15 @@ function buildCheckersBoard(actualCheckersGame){
             .on("click", function() {
                 clickPlayButton(actualCheckersGame, "rngBRR");
             });        
+
+        d3.select("#" + leftSideHeaderSVGTop)
+            .append("input")
+            .attr("type", "button")
+            .attr("class", "button")
+            .attr("value", "COSTUM TREE")
+            .on("click", function() {
+                clickPlayButton(actualCheckersGame, "input");
+            });
     }
     //board is the data
 
