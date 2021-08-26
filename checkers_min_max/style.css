@@ -1,23 +1,63 @@
-svg {
-    background-color: grey;
+.fullScreen {
+    background:red;
+    position:absolute;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
 }
 
-.link {
-    stroke: #000;
-    stroke-width: 1.5px;
-}
-  
-.node {
-    cursor: move;
-    fill: #ccc;
-    stroke: #000;
-    stroke-width: 1.5px;
-}
-  
-.node.fixed {
-    fill: #f00;
+.halfScreenLeft {
+    background:rgb(72, 86, 100);
+    position:absolute;
+    top:0px;
+    left:0px;
+    width: 50%;
+    height: 100%;
 }
 
-.checkersPieceStyle{
-    font-size: 100px;
+.leftSideHeader {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width: 100%;
+    height: 10%;
+}
+
+.leftSideHeaderTop{
+    position:absolute;
+    top:0px;
+    left:0px;
+    width: 100%;
+    height: 50%;
+}
+
+.leftSideHeaderBot{
+    position:absolute;
+    top:50%;
+    left:0px;
+    width: 100%;
+    height: 50%;
+}
+
+.leftSideCheckers {
+    background:rgb(255, 255, 255);
+    position:absolute;
+}
+
+.leftSideFooter {
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    width: 100%;
+    height: 10%;
+}
+
+.halfScreenRight {
+    background:rgb(0, 0, 0);
+    position:absolute;
+    top:0px;
+    right:0px;
+    width: 50%;
+    height: 100%;
 }

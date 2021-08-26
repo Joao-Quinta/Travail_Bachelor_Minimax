@@ -2,6 +2,7 @@ var windowMin = 500;
 var windowMax = 600;
 var fullWindowWidth = document.documentElement.clientWidth;
 var fullWindowHeight = document.documentElement.clientHeight;
+var footAndHeaderHeight = Math.floor(fullWindowHeight * 0.1);
 var halfWindowWidth = Math.floor(fullWindowWidth/2);
 var smallerSide = Math.min(fullWindowHeight, halfWindowWidth);
 var windowSize = Math.floor(80 * smallerSide / 100);
@@ -20,16 +21,17 @@ const idRightDiv = "minMaxTree";
 const idLeftDivPaTurn = "paragrapheCoup";
 const idRightDivStat = "paragrapheStat";
 const idCheckersSVG = "cherckersSVG";
+const idMinMaxTree = "minMaxTreeGraph";
 const leftSideBackgroundColor = "#99ccff";
+const leftSideHeaderSVG = "leftSideHeaderSVG";
+const leftSideFooterSVG = "leftSideFooterSVG";
+const rightSideHeaderSVG = "rightSideHeaderSVG";
+const rightSideFooterSVG = "rightSideFooterSVG";
+const leftSideHeaderSVGTop = "leftSideHeaderSVGTop"
+const leftSideHeaderSVGBot = "leftSideHeaderSVGBot"
 
 test1();
 test2();
-/*
-for(var i = 0; i < 10; i++){
-    var rng = Math.floor(Math.random() * (9 - 0 + 1)) + 0;
-    console.log(0 + " - TO -> " + 10 + " => " + rng);
-}
-*/
 
 function launchGame(){
     var draughtsGame = new Draughts();
@@ -39,7 +41,8 @@ function launchGame(){
 
 launchGame();
 
-var test2 = "amaxb,c.bmind,e.cminf,g.dmax2.emax-1.fmax4.gmax-2";
+/*
+var test2 = "amaxb,c.bmind,e.cminf,g.dmaxj,h.emaxk,l,m.fmaxn,o,p.gmaxq,r,s.jmint,u,v.hminw,x,y.kmin-3.lmin-3.mmin2.nmin4.omin2.pmin6.qmin-5.rmin-2.smin-2.tmax-4.umax3.vmax-5.wmax-2.xmax6.ymax7";
 var test1 = test2.split('.');
 console.log(test1)
 var nodes = [];
@@ -95,3 +98,5 @@ console.log(wholeTree)
 minmax(wholeTree, -Infinity, Infinity);
 console.log(wholeTree)
 buildMinMaxGraph(wholeTree, 1, true);
+
+*/

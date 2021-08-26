@@ -86,6 +86,7 @@ function buildMinMaxGraph(treeNode, depth, isCostum){
             nodeDef = '    ' + currentNode.uniqueID.toString() + ' [' + colors + ', label="' + val + '"]';
             nodesListFilled.push(nodeDef);
         }else{
+            //nodeDef = '    ' + currentNode.uniqueID.toString() + ' [' + colors + ', label="' + val + '"]';
             nodeDef = '    ' + currentNode.uniqueID.toString() + ' [' + colors + ', label="?"]';
             nodesListEmpty.push(nodeDef);
         }
@@ -108,8 +109,8 @@ function buildMinMaxGraph(treeNode, depth, isCostum){
                         color = 'red';
                     }
                     if (i == transitionChosen){
-                        //transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString()+ ' [label=' + label + ' color='+ color +' penwidth=4]';
-                        transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString()+ ' [label=' + label + ']';
+                        transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString()+ ' [label=' + label + ' color='+ color +' penwidth=4]';
+                        //transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString()+ ' [label=' + label + ']';
                     }else{
                         transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString()+ ' [label=' + label + ']';
                     }
@@ -119,6 +120,7 @@ function buildMinMaxGraph(treeNode, depth, isCostum){
                     
                 }
                 if(!fils.visited && depth < 4){
+                    //transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString() + ' [label=' + label + ']';
                     transition = ' ' + currentNode.uniqueID.toString() + ' -> ' + fils.uniqueID.toString() + ' [style=dashed label=' + label + ']';
 
                     transitionsList.push(transition);
@@ -134,6 +136,7 @@ function buildMinMaxGraph(treeNode, depth, isCostum){
     var nodesEmptydString = nodesListEmpty.join('');
 
     finalList.push(start);
+    //finalList.push(startFilledNodes);
     finalList.push(nodesEmptydString);
     finalList.push(startFilledNodes);
     finalList.push(nodesFilledString);
@@ -143,7 +146,7 @@ function buildMinMaxGraph(treeNode, depth, isCostum){
     var finalString = finalList.join('');
     
 
-    var u = d3.select("#graphSVG")
+    var u = d3.select("#" + idMinMaxTree)
         .graphviz()
         .height(windowSize)
         .width(windowSize)
