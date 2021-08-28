@@ -37,25 +37,40 @@ function clickPlayButton(actualCheckersGame, action){
         actualCheckersGame.move(actualCheckersGame.moves()[rng]);
         buildCheckersBoard(actualCheckersGame);
 
+    }else if (action == "run"){
+        var input = document.getElementById("treeInputBox").value
+        parseInput(input);
+
+    }else if(action == "input"){
+        creatCostumTree();
     }else if (action == "move"){
         nodeCounter = 0;
         //make move computed using minMax with alpha beta pruning
         var isMax = true;
         var type = "max";
-        var depth = 3;
+        var depth = parseInt(document.getElementById(leftSideHeaderSVGBot + "BLMenu").value);
 
         if (actualCheckersGame.fen()[0] == 'B'){
             isMax = false;
             type = "min";
-            depth = 3;
+            depth = parseInt(document.getElementById(leftSideHeaderSVGBot + "NRMenu").value);
+        }
+
+        if (depth == 0){
+            clickPlayButton(actualCheckersGame, "rng")
+        }else{
+            var treeNode = computeTree(actualCheckersGame, 0, depth, isMax);
+            var t0 = performance.now()
+            minmax(treeNode, -Infinity, Infinity);
+            var t1 = performance.now()
+            console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")
+            var bestIndex = indexOfMaxMin(treeNode.valueF, type);
+            actualCheckersGame.move(actualCheckersGame.moves()[bestIndex]);
+            buildCheckersBoard(actualCheckersGame);
+            buildMinMaxGraph(treeNode, depth, false, 0);
         }
         
-        var treeNode = computeTree(actualCheckersGame, 0, depth, isMax);
-        minmax(treeNode, -Infinity, Infinity);
-        var bestIndex = indexOfMaxMin(treeNode.valueF, type);
-        actualCheckersGame.move(actualCheckersGame.moves()[bestIndex]);
-        buildCheckersBoard(actualCheckersGame);
-        buildMinMaxGraph(treeNode, depth, false);
+        
 
     }else if (action == "rngBRR"){
         //makes 10 random moves

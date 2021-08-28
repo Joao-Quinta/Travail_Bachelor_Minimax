@@ -1,5 +1,6 @@
 //builds a screen with two divisions, each with an ID
 function buildScreen(){   
+    var valueOptions = ['0','1','2','3','4','5','6','7','8'];
 
     //create a div of full scree  
     d3.select("body")
@@ -49,6 +50,13 @@ function buildScreen(){
         .append("div")
         .attr("id", leftSideHeaderSVGBot + "BR")
         .attr("class", "leftSideHeaderBotNR");
+    
+    makeDropDownMenu(leftSideHeaderSVGBot + "BL", leftSideHeaderSVGBot + "BLMenu", valueOptions);
+
+    d3.select("#"+ leftSideHeaderSVGBot + "BR")
+        .append("text")
+        .text("coups en avance")
+        .style('color', 'white');
 
     d3.select("#" + leftSideHeaderSVGBot)
         .append("div")
@@ -70,6 +78,13 @@ function buildScreen(){
         .attr("id", leftSideHeaderSVGBot + "NR")
         .attr("class", "leftSideHeaderBotNR");
     
+    makeDropDownMenu(leftSideHeaderSVGBot + "NR", leftSideHeaderSVGBot + "NRMenu", valueOptions);
+
+    d3.select("#"+ leftSideHeaderSVGBot + "NL")
+        .append("text")
+        .text("coups en avance")
+        .style('color', 'black');
+
     d3.select("#" + idLeftDiv)
         .append("svg")
         .attr("id", idCheckersSVG)
@@ -89,6 +104,61 @@ function buildScreen(){
         .append("div")
         .attr("id", rightSideHeaderSVG)
         .attr("class", "leftSideHeader");
+    
+    d3.select("#" + rightSideHeaderSVG)
+        .append("div")
+        .attr("id", rightSideHeaderSVG + "Top")
+        .attr("class", "leftSideHeaderTop");
+
+    d3.select("#" + rightSideHeaderSVG + "Top")
+        .append("div")
+        .attr("id", rightSideHeaderSVG + "Top1")
+        .attr("class", "leftSideHeaderLeft");
+
+    d3.select("#" + rightSideHeaderSVG + "Top1")
+        .append('text')
+        .text('Noeuds Crées :')
+        .attr("class", "rightSideText");
+
+    d3.select("#" + rightSideHeaderSVG + "Top")
+        .append("div")
+        .attr("id", rightSideHeaderSVG + "Top2")
+        .attr("class", "leftSideHeaderMiddle");
+
+    d3.select("#" + rightSideHeaderSVG + "Top2")
+        .append('text')
+        .text('Noeuds Visités :')
+        .attr("class", "rightSideText");
+
+    d3.select("#" + rightSideHeaderSVG + "Top")
+        .append("div")
+        .attr("id", rightSideHeaderSVG + "Top3")
+        .attr("class", "leftSideHeaderRight");
+
+    d3.select("#" + rightSideHeaderSVG + "Top3")
+        .append('text')
+        .text('Visitées/Crées*100 :')
+        .attr("class", "rightSideText");
+
+    d3.select("#" + rightSideHeaderSVG)
+        .append("div")
+        .attr("id", rightSideHeaderSVG + "Bot")
+        .attr("class", "leftSideHeaderBot");
+
+    d3.select("#" + rightSideHeaderSVG + "Bot")
+        .append("div")
+        .attr("id", rightSideHeaderSVG + "Bot1")
+        .attr("class", "leftSideHeaderLeft");
+
+    d3.select("#" + rightSideHeaderSVG + "Bot")
+        .append("div")
+        .attr("id", rightSideHeaderSVG + "Bot2")
+        .attr("class", "leftSideHeaderMiddle");
+
+    d3.select("#" + rightSideHeaderSVG + "Bot")
+        .append("div")
+        .attr("id", rightSideHeaderSVG + "Bot3")
+        .attr("class", "leftSideHeaderRight");
 
     d3.select("#" + idRightDiv)
         .append("svg")
@@ -118,6 +188,29 @@ function buildCheckersBoard(actualCheckersGame){
         .selectAll("*")
         .remove();
 
+    d3.select("#" + leftSideHeaderSVGTop)
+        .append("div")
+        .attr("id", leftSideHeaderSVGTop + "1")
+        .attr("class", "leftSideHeaderTopSplits");
+
+    d3.select("#" + leftSideHeaderSVGTop)
+        .append("div")
+        .attr("id", leftSideHeaderSVGTop + "2")
+        .style("left","25%")
+        .attr("class", "leftSideHeaderTopSplits");
+
+    d3.select("#" + leftSideHeaderSVGTop)
+        .append("div")
+        .attr("id", leftSideHeaderSVGTop + "3")
+        .style("left","50%")
+        .attr("class", "leftSideHeaderTopSplits");
+
+    d3.select("#" + leftSideHeaderSVGTop)
+        .append("div")
+        .attr("id", leftSideHeaderSVGTop + "4")
+        .style("left","75%")
+        .attr("class", "leftSideHeaderTopSplits");
+
     if(actualCheckersGame.gameOver()){
         
         var texte = "";
@@ -132,6 +225,8 @@ function buildCheckersBoard(actualCheckersGame){
         }
         d3.select("#" + leftSideHeaderSVGBot + "Score")
             .append("text")
+            .style("font-size", "2vw")
+            .style("color", "red")
             .text(texte);
         
         d3.select("#" + leftSideHeaderSVGTop)
@@ -148,10 +243,12 @@ function buildCheckersBoard(actualCheckersGame){
         //a faire plus tard, va faire jouer un coup
         d3.select("#" + leftSideHeaderSVGBot + "Score")
             .append("text")
-            .text("Game state : " + computeValue(actualCheckersGame));
+            .text("Score : " + computeValue(actualCheckersGame))
+            .style("font-size", "2vw")
+            .style("color", "red");
 
 
-        d3.select("#" + leftSideHeaderSVGTop)
+        d3.select("#" + leftSideHeaderSVGTop + "1")
             .append("input")
             .attr("type", "button")
             .attr("class", "button")
@@ -161,7 +258,7 @@ function buildCheckersBoard(actualCheckersGame){
                 launchGame();
             });
 
-        d3.select("#" + leftSideHeaderSVGTop)
+        d3.select("#" + leftSideHeaderSVGTop + "2")
             .append("input")
             .attr("type", "button")
             .attr("class", "button")
@@ -170,7 +267,7 @@ function buildCheckersBoard(actualCheckersGame){
                 clickPlayButton(actualCheckersGame, "move");
             });
 
-        d3.select("#" + leftSideHeaderSVGTop)
+        d3.select("#" + leftSideHeaderSVGTop + "3")
             .append("input")
             .attr("type", "button")
             .attr("class", "button")
@@ -179,7 +276,7 @@ function buildCheckersBoard(actualCheckersGame){
                 clickPlayButton(actualCheckersGame, "rngBRR");
             });        
 
-        d3.select("#" + leftSideHeaderSVGTop)
+        d3.select("#" + leftSideHeaderSVGTop + "4")
             .append("input")
             .attr("type", "button")
             .attr("class", "button")
@@ -236,4 +333,25 @@ function buildCheckersBoard(actualCheckersGame){
         })
         .attr("pointer-events", "none");
 
+}
+
+function makeDropDownMenu(pId, fId, data){
+    var dropdown = d3.select("#" + pId)
+        .append("select")
+        .style("width", "50%")
+        .style("height", "50%")
+        .attr("id", fId);
+    
+    var options = dropdown.selectAll("option")
+        .data(data)
+        .enter()
+        .append("option")
+        .attr("value", function(d) {
+            return d;
+        })
+        .text(function(d) {
+            return d;
+        });
+
+    options.property("selected", function(d) { return d === '2'});
 }

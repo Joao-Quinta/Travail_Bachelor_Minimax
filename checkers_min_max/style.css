@@ -72,6 +72,7 @@
 
 .leftSideHeaderBotScore {
     position:absolute;
+    text-align: center;
     top:0px;
     left:20%;
     width: 60%;
@@ -88,6 +89,7 @@
 
 .leftSideHeaderBotNL {
     position:absolute;
+    text-align: center;
     top:0px;
     left:0px;
     width: 50%;
@@ -96,8 +98,100 @@
 
 .leftSideHeaderBotNR {
     position:absolute;
+    text-align: center;
     top:0px;
     right:0px;
     width: 50%;
     height: 100%;
+}
+
+.leftSideHeaderTopSplits{
+    position:absolute;
+    text-align: center;
+    top:0px;
+    width: 25%;
+    height: 100%;
+}
+
+.button{
+    height: 70%;
+    width: 80%;
+    margin-top: 3%;
+}
+
+.leftSideHeaderLeft{
+    position:absolute;
+    text-align: center;
+    top:0px;
+    width: 33%;
+    height: 100%;
+    left: 0%;
+}
+
+.leftSideHeaderMiddle{
+    position:absolute;
+    text-align: center;
+    top:0px;
+    width: 33%;
+    height: 100%;
+    left: 33%;
+}
+
+.leftSideHeaderRight{
+    position:absolute;
+    text-align: center;
+    top:0px;
+    width: 33%;
+    height: 100%;
+    left: 66%;
+}
+
+.rightSideText{
+    color: white;
+    font-size: 3vh;
+    font-weight: bolder;
+}
+.inputScreenC{
+    position: absolute;
+    top: 15%;
+    height: 70%;
+    width: 70%;
+    left: 15%;
+    background-color: rgb(42, 111, 143);
+}
+
+.reglesInputC{
+    position:absolute;
+    top: 0%;
+    height: 60%;
+    width: 100%;
+}
+
+.reglesInputCTop{
+    position:absolute;
+    text-align: center;
+    top: 10%;
+    height: 20%;
+    width: 100%;
+}
+
+.reglesInputCBot{
+    position:absolute;
+    text-align: left;
+    top: 30%;
+    left: 10%;
+    height: 70%;
+    width: 80%;
+}
+
+.textRegles{
+    font-size: large;
+}
+
+.boxInputC{
+    position:absolute;
+    bottom: 0%;
+    left: 10%;
+    height: 30%;
+    width: 80%;
 }

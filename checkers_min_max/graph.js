@@ -1,5 +1,5 @@
-function buildMinMaxGraph(treeNode, depth, isCostum){
-    var totalNumberOfNodes = treeNode.uniqueID;
+function buildMinMaxGraph(treeNode, depth, isCostum, nbTotal){
+    var totalNumberOfNodes = treeNode.uniqueID + 1;
     var nodesVisited = 0;
 
     var ranksep;
@@ -32,6 +32,7 @@ function buildMinMaxGraph(treeNode, depth, isCostum){
     var finalList = []
     var start = 'digraph  { layout=twopi; ratio=auto; overlap=true; ranksep=' + ranksep + '; root=' + root + ';';
     if (isCostum){
+        totalNumberOfNodes = nbTotal;
         start = 'digraph  {ratio=auto; overlap=false;';
 
     }
@@ -154,6 +155,23 @@ function buildMinMaxGraph(treeNode, depth, isCostum){
         .dot(finalString)
         .render();
 
-    console.log("nodes visited -> " + nodesVisited);
-    console.log("nodes total   -> " + totalNumberOfNodes);
+    d3.select("#" + rightSideHeaderSVG + "Bot1").selectAll('text').remove();
+    d3.select("#" + rightSideHeaderSVG + "Bot2").selectAll('text').remove();
+    d3.select("#" + rightSideHeaderSVG + "Bot3").selectAll('text').remove();
+
+    d3.select("#" + rightSideHeaderSVG + "Bot1")
+        .append('text')
+        .text(totalNumberOfNodes.toString())
+        .attr("class", "rightSideText");
+
+    d3.select("#" + rightSideHeaderSVG + "Bot2")
+        .append('text')
+        .text(nodesVisited.toString())
+        .attr("class", "rightSideText");
+
+    d3.select("#" + rightSideHeaderSVG + "Bot3")
+        .append('text')
+        .text((Math.floor(nodesVisited/totalNumberOfNodes*100)).toString() + " %")
+        .attr("class", "rightSideText");
+
 }
