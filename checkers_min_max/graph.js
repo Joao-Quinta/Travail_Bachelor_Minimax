@@ -132,29 +132,6 @@ function buildMinMaxGraph(treeNode, depth, isCostum, nbTotal){
         }
     }
 
-    var transitionsString = transitionsList.join('');
-    var nodesFilledString = nodesListFilled.join('');
-    var nodesEmptydString = nodesListEmpty.join('');
-
-    finalList.push(start);
-    //finalList.push(startFilledNodes);
-    finalList.push(nodesEmptydString);
-    finalList.push(startFilledNodes);
-    finalList.push(nodesFilledString);
-    finalList.push(transitionsString);
-    finalList.push(end);
-
-    var finalString = finalList.join('');
-    
-
-    var u = d3.select("#" + idMinMaxTree)
-        .graphviz()
-        .height(windowSize)
-        .width(windowSize)
-        .fit(true)
-        .dot(finalString)
-        .render();
-
     d3.select("#" + rightSideHeaderSVG + "Bot1").selectAll('text').remove();
     d3.select("#" + rightSideHeaderSVG + "Bot2").selectAll('text').remove();
     d3.select("#" + rightSideHeaderSVG + "Bot3").selectAll('text').remove();
@@ -171,7 +148,31 @@ function buildMinMaxGraph(treeNode, depth, isCostum, nbTotal){
 
     d3.select("#" + rightSideHeaderSVG + "Bot3")
         .append('text')
-        .text((Math.floor(nodesVisited/totalNumberOfNodes*100)).toString() + " %")
+        .text((nodesVisited/totalNumberOfNodes*100).toString() + " %")
         .attr("class", "rightSideText");
+
+    var transitionsString = transitionsList.join('');
+    var nodesFilledString = nodesListFilled.join('');
+    var nodesEmptydString = nodesListEmpty.join('');
+
+    finalList.push(start);
+    //finalList.push(startFilledNodes);
+    finalList.push(nodesEmptydString);
+    finalList.push(startFilledNodes);
+    finalList.push(nodesFilledString);
+    finalList.push(transitionsString);
+    finalList.push(end);
+
+    var finalString = finalList.join('');
+
+    var u = d3.select("#" + idMinMaxTree)
+        .graphviz()
+        .height(windowSize)
+        .width(windowSize)
+        .fit(true)
+        .dot(finalString)
+        .render();
+
+    
 
 }
