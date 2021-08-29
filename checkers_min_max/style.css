@@ -153,10 +153,10 @@
 }
 .inputScreenC{
     position: absolute;
-    top: 15%;
-    height: 70%;
-    width: 70%;
-    left: 15%;
+    top: 10%;
+    height: 80%;
+    width: 80%;
+    left: 10%;
     background-color: rgb(42, 111, 143);
 }
 
@@ -192,6 +192,6 @@
     position:absolute;
     bottom: 0%;
     left: 10%;
-    height: 30%;
+    height: 10%;
     width: 80%;
 }

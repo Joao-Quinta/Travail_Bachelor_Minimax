@@ -99,7 +99,7 @@ function creatCostumTree(){
         .attr("id", "treeInputBox")
         .attr("placeholder", "Votre arbre personalisé ici ...")
         .style("width", "100%")
-        .style("height", "30%");
+        .style("height", "80%");
 
     d3.select("#" + leftSideHeaderSVGTop + "4")
         .append("input")
