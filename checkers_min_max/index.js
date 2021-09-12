@@ -38,11 +38,15 @@ function launchGame(){
         .remove();
         
     var draughtsGame = new Draughts();
+    //console.log(draughtsGame.moves())
+    //draughtsGame.move(draughtsGame.moves()[1])
     buildScreen();
     buildCheckersBoard(draughtsGame);
 }
 
 launchGame();
+
+
 /*
 d3.select('#wholeScreen')
     .remove();

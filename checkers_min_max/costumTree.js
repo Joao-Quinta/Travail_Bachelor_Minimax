@@ -46,25 +46,25 @@ function creatCostumTree(){
     d3.select("#inputScreenTop2")
         .append("p")
         .append("text")
-        .text("(1) il faut séparer chaque noeud avec un point final . ")
+        .text("(1) il faut séparer chaque noeud avec un point final ")
         .attr("class", "textRegles");
 
     d3.select("#inputScreenTop2")
         .append("p")
         .append("text")
-        .text("(2) il faut insérer les noeuds dans l'ordre racine -> feuille ")
+        .text("(2) il faut insérer les noeuds allant de la racine à la feuille (BFS) ")
         .attr("class", "textRegles");
 
     d3.select("#inputScreenTop2")
         .append("p")
         .append("text")
-        .text("(3.a) un noeud final est defini par : nom (nom de taille = 1) | type (max ou min) | valeur numérique (int) || exemple -> a min 2")
+        .text("(3.a) un noeud final est défini par : nom (nom de taille = 1) | type (max ou min) | valeur numérique (int) || exemple -> a min 2")
         .attr("class", "textRegles");
     
     d3.select("#inputScreenTop2")
         .append("p")
         .append("text")
-        .text("(3.b) un noeud non final est defini par : nom (nom de taille = 1) | type (max ou min) | liste des enfants séparés par des virgules || exemple -> a max b,c")
+        .text("(3.b) un noeud non final est défini par : nom (nom de taille = 1) | type (max ou min) | liste des enfants séparés par des virgules || exemple -> a max b,c")
         .attr("class", "textRegles");
 
     d3.select("#inputScreenTop2")
@@ -76,7 +76,7 @@ function creatCostumTree(){
     d3.select("#inputScreenTop2")
         .append("p")
         .append("text")
-        .text("(5) voici le texte qui résulte dans le graph à droite : (il faut passer la sourie sur un noeud pour voir son nom)")
+        .text("(5) voici le texte qui résulte dans le graphe à droite : (il faut passer la souris sur un noeud pour voir son nom)")
         .attr("class", "textRegles");
 
     d3.select("#inputScreenTop2")

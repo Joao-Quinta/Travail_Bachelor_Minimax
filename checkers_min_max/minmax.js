@@ -57,16 +57,17 @@ function clickPlayButton(actualCheckersGame, action){
         }
 
         if (depth == 0){
-            clickPlayButton(actualCheckersGame, "rng")
+            clickPlayButton(actualCheckersGame, "rng");
         }else{
+            var keepMoves = actualCheckersGame.moves();
             var treeNode = computeTree(actualCheckersGame, 0, depth, isMax);
             var t0 = performance.now()
             minmax(treeNode, -Infinity, Infinity);
             var t1 = performance.now()
-            console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")
             var bestIndex = indexOfMaxMin(treeNode.valueF, type);
             actualCheckersGame.move(actualCheckersGame.moves()[bestIndex]);
             buildCheckersBoard(actualCheckersGame);
+            buildArrows(keepMoves);
             buildMinMaxGraph(treeNode, depth, false, 0);
         }
         

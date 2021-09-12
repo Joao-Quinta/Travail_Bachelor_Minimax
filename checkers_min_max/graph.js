@@ -148,7 +148,7 @@ function buildMinMaxGraph(treeNode, depth, isCostum, nbTotal){
 
     d3.select("#" + rightSideHeaderSVG + "Bot3")
         .append('text')
-        .text((nodesVisited/totalNumberOfNodes*100).toString() + " %")
+        .text((Math.round(((nodesVisited/totalNumberOfNodes*100) + Number.EPSILON) * 100) / 100).toString() + " %")
         .attr("class", "rightSideText");
 
     var transitionsString = transitionsList.join('');

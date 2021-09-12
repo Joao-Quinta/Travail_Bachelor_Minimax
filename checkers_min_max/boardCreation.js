@@ -117,7 +117,7 @@ function buildScreen(){
 
     d3.select("#" + rightSideHeaderSVG + "Top1")
         .append('text')
-        .text('Noeuds Crées :')
+        .text('Noeuds Créés :')
         .attr("class", "rightSideText");
 
     d3.select("#" + rightSideHeaderSVG + "Top")
@@ -137,7 +137,7 @@ function buildScreen(){
 
     d3.select("#" + rightSideHeaderSVG + "Top3")
         .append('text')
-        .text('Visitées/Crées*100 :')
+        .text('Visités/Créés*100 :')
         .attr("class", "rightSideText");
 
     d3.select("#" + rightSideHeaderSVG)
@@ -258,11 +258,17 @@ function buildCheckersBoard(actualCheckersGame){
                 launchGame();
             });
 
+        var textB;
+        if(actualCheckersGame.fen()[0] == 'B'){
+            textB = "FAIRE UN COUP -> Noir";
+        } else{
+            textB = "FAIRE UN COUP -> Blanc";
+        }
         d3.select("#" + leftSideHeaderSVGTop + "2")
             .append("input")
             .attr("type", "button")
             .attr("class", "button")
-            .attr("value", "FAIRE UN COUP")
+            .attr("value", textB)
             .on("click", function() {
                 clickPlayButton(actualCheckersGame, "move");
             });
@@ -293,6 +299,7 @@ function buildCheckersBoard(actualCheckersGame){
         .remove();
 
     var boardSVG = d3.select("#" + idCheckersSVG);
+
 
     //adds <g></g> for each data in board and adds on click()
     boardSVG = boardSVG.selectAll(".fields")
@@ -354,4 +361,112 @@ function makeDropDownMenu(pId, fId, data){
         });
 
     options.property("selected", function(d) { return d === '2'});
+}
+
+function buildArrows(movesList){
+    var boardSVG = d3.select("#" + idCheckersSVG);
+    boardSVG.append("svg:defs").append("svg:marker")
+        .attr("id", "triangle")
+        .attr("refX", 6)
+        .attr("refY", 6)
+        .attr("markerWidth", 30)
+        .attr("markerHeight", 30)
+        .attr("markerUnits","userSpaceOnUse")
+        .attr("orient", "auto")
+        .append("path")
+        .attr("d", "M 0 0 12 6 0 12 3 6")
+        .style("fill", "red");
+
+
+    for(var i = 0; i < movesList.length; i++){
+        //console.log(movesList[i].from)
+        //console.log(movesList[i].to)
+        //console.log("jump")
+        var fromN = movesList[i].from;
+        var toN = movesList[i].to;
+        var x1 = getCCX(fromN);
+        var y1 = getCCY(fromN);
+        var x2 = ((getCCX(toN) - x1) * 0.9) + x1;
+        var y2 = ((getCCY(toN) - y1) * 0.9) + y1;
+
+        var x3 = (x2-x1)/2 + x1;
+        var y3 = (y2-y1)/2 + y1;
+        
+
+        var boardSVG = d3.select("#" + idCheckersSVG);
+
+        boardSVG.append("line")
+            .attr("x1", x1)
+            .attr("y1", y1)
+            .attr("x2", x2)
+            .attr("y2", y2)
+            .attr("stroke", "red")
+            .attr("stroke-width",4)
+            .attr("marker-end", "url(#triangle)");
+
+        boardSVG.append("text")
+            .text((i+1).toString())
+            .attr("x", x3)
+            .attr("y", y3)
+            .style("font-size", "25px")
+            .style("font-weight", "800");
+        
+    }
+    //var ccY = getCCX(11);
+    
+
+}
+
+function getCCX(number){
+    var x;
+    var resteN = number%10;
+    if(resteN == 0){
+        x = fieldSize/2 + 8 * fieldSize;
+    }else if(resteN == 1){
+        x = fieldSize/2 + fieldSize;
+    }else if(resteN == 2){
+        x = fieldSize/2 + 3 * fieldSize;
+    }else if(resteN == 3){
+        x = fieldSize/2 + 5 * fieldSize;
+    }else if(resteN == 4){
+        x = fieldSize/2 + 7 * fieldSize;
+    }else if(resteN == 5){
+        x = fieldSize/2 + 9 * fieldSize;
+    }else if(resteN == 6){
+        x = fieldSize/2;
+    }else if(resteN == 7){
+        x = fieldSize/2 + 2 * fieldSize;
+    }else if(resteN == 8){
+        x = fieldSize/2 + 4 * fieldSize;
+    }else if(resteN == 9){
+        x = fieldSize/2 + 6 * fieldSize;
+    }
+    return x;
+
+}
+
+function getCCY(number){
+    var y;
+    if (number < 6){
+        y = fieldSize/2;
+    }else if (number < 11){
+        y = fieldSize/2 + fieldSize;
+    }else if (number < 16){
+        y = fieldSize/2 + 2 * fieldSize;
+    }else if (number < 21){
+        y = fieldSize/2 + 3 * fieldSize;
+    }else if (number < 26){
+        y = fieldSize/2 + 4 * fieldSize;
+    }else if (number < 31){
+        y = fieldSize/2 + 5 * fieldSize;
+    }else if (number < 36){
+        y = fieldSize/2 + 6 * fieldSize;
+    }else if (number < 41){
+        y = fieldSize/2 + 7 * fieldSize;
+    }else if (number < 46){
+        y = fieldSize/2 + 8 * fieldSize;
+    }else if (number < 51){
+        y = fieldSize/2 + 9 * fieldSize;
+    }
+    return y;
 }
